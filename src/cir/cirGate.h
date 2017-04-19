@@ -21,6 +21,15 @@ using namespace std;
 
 class CirGate;
 
+enum GateType {
+   GATE_CONST,
+   GATE_PI,
+   GATE_PO,
+   GATE_AIG,
+
+   GATE_UNDEF
+};
+
 //------------------------------------------------------------------------
 //   Define classes
 //------------------------------------------------------------------------
@@ -29,7 +38,7 @@ class CirGateV
 #define NEG 0x1
 public:
    CirGateV() {}
-   CirGateV(CirGate* g, size_t phase) _gateV(size_t(g)+phase) {}
+   CirGateV(CirGate* g, size_t phase): _gateV(size_t(g)+phase) {}
    ~CirGateV() {}
    CirGate* getGate() { return (CirGate*)(_gateV & ~(size_t)NEG); }
    bool     isInv() { return (_gateV & NEG); }
@@ -43,11 +52,11 @@ private:
 class CirGate
 {
 public:
-   CirGate(unsigned g, unsigned l) _id(g), _lineNo(l), {}
+   CirGate(unsigned g, unsigned l): _id(g), _lineNo(l) {}
    virtual ~CirGate() {}
 
    // Basic access methods
-   string getTypeStr() const = 0;
+   virtual string getTypeStr() const = 0;
    unsigned getLineNo() const { return _lineNo; }
    unsigned getGateId() const { return _id; }
    virtual bool isAig() const { return false; }
@@ -76,9 +85,9 @@ protected:
 class CirPiGate: public CirGate
 {
 public:
-   CirPiGate(unsigned g, unsigned l) CirGate(g,l), _name(0) {}
+   CirPiGate(unsigned g, unsigned l): CirGate(g,l), _name(0) {}
    ~CirPiGate() {}
-   string getTypeStr() { return "PI"; }
+   string getTypeStr() const { return "PI"; }
    bool isPi() { return true; }
 private:
    char* _name;
@@ -90,9 +99,9 @@ private:
 class CirPoGate: public CirGate
 {
 public:
-   CirPoGate(unsigned g, unsigned l) CirGate(g,l), _name(0) {}
+   CirPoGate(unsigned g, unsigned l): CirGate(g,l), _name(0) {}
    ~CirPoGate() {}
-   string getTypeStr() { return "PO"; }
+   string getTypeStr() const { return "PO"; }
    bool isPo() { return true; }
 private:
    char* _name;
@@ -104,7 +113,7 @@ private:
 class CirAigGate: public CirGate
 {
 public:
-   CirAigGate(unsigned g, unsigned l) CirGate(g,l) {}
+   CirAigGate(unsigned g, unsigned l): CirGate(g,l) {}
    ~CirAigGate() {}
    CirGateV getIn0() { return _in0; }
    CirGateV getIn1() { return _in1; }
@@ -112,7 +121,7 @@ public:
    CirGate* getIn1Gate() { return _in1.getGate(); }
    unsigned getNumFanin() { return 2; }
 
-   string getTypeStr() { return "AIG"; }
+   string getTypeStr() const { return "AIG"; }
    bool isAig() { return true; }
 private:
    CirGateV _in0;
@@ -125,9 +134,9 @@ private:
 class CirUndefGate: public CirGate
 {
 public:
-   CirUndefGate(unsigned g) CirGate(g,0), _name(0) {}
+   CirUndefGate(unsigned g): CirGate(g,0), _name(0) {}
    ~CirUndefGate() {}
-   string getTypeStr() { return "UNDEF"; }
+   string getTypeStr() const { return "UNDEF"; }
    bool isUndef() { return true; }
 private:
    char* _name;

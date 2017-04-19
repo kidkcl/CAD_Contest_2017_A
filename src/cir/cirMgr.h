@@ -59,6 +59,9 @@ public:
    void writeAag(ostream&) const;
    void writeGate(ostream&, CirGate*) const;
 
+   // Reading circuits
+   bool readVerilog(const string& filename) {} // FIX ME
+
 private:
    // Helper functions for parse circuit
    bool               readHeader(ifstream&);

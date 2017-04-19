@@ -152,6 +152,7 @@ parseError(CirParseError err)
 bool
 CirMgr::readCircuit(const string& fileName)
 {
+   /*
    ifstream aigfile(fileName.c_str());
    if(!aigfile) {
       cerr << "Cannot open design " << fileName << "!!" << endl;
@@ -166,6 +167,7 @@ CirMgr::readCircuit(const string& fileName)
    connectCircuit();
    
    genDFSList();
+   */
    return true;
 }
 

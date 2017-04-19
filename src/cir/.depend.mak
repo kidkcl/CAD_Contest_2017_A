@@ -22,6 +22,12 @@ cirMgr.o: cirMgr.cpp cirMgr.h cirDef.h ../../include/myHashMap.h \
  ../../include/VarOrder.h ../../include/Heap.h ../../include/Proof.h \
  ../../include/File.h ../../include/util.h ../../include/rnGen.h \
  ../../include/myUsage.h
+cirMiter.o: cirMiter.cpp cirMiter.h cirDef.h ../../include/myHashMap.h \
+ cirMgr.h ../../include/sat.h ../../include/Solver.h \
+ ../../include/SolverTypes.h ../../include/Global.h \
+ ../../include/VarOrder.h ../../include/Heap.h ../../include/Proof.h \
+ ../../include/File.h ../../include/util.h ../../include/rnGen.h \
+ ../../include/myUsage.h
 cirOpt.o: cirOpt.cpp cirMgr.h cirDef.h ../../include/myHashMap.h \
  cirGate.h ../../include/sat.h ../../include/Solver.h \
  ../../include/SolverTypes.h ../../include/Global.h \
