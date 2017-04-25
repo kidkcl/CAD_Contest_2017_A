@@ -60,7 +60,7 @@ public:
    void writeGate(ostream&, CirGate*) const;
 
    // Reading circuits
-   bool readVerilog(const string& filename) {} // FIX ME
+   bool readVerilog(const string& filename); // FIX ME
 
 private:
    // Helper functions for parse circuit

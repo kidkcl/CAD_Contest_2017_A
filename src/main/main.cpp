@@ -21,5 +21,6 @@ main(int argc, char** argv)
    if(argc == 6) {
        CirMiter* miter = new CirMiter;
    }
+   else cout << "wrong arg!!" << endl;
    return 0;
 }

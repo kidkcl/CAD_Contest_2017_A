@@ -150,6 +150,15 @@ parseError(CirParseError err)
 /*   class CirMgr member functions for circuit construction   */
 /**************************************************************/
 bool
+CirMgr::readVerilog(const string& fileName)
+{
+    string tmpFile = fileName + ".tmp";
+    if(!removeComment(fileName, tmpFile)) return false;
+    if(!parse(tmpFile)) return false;
+    return true;
+}
+    
+bool
 CirMgr::readCircuit(const string& fileName)
 {
    /*

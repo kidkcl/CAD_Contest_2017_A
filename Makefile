@@ -6,7 +6,7 @@ MAIN     = main
 LIBS     = $(addprefix -l, $(LIBPKGS))
 SRCLIBS  = $(addsuffix .a, $(addprefix lib, $(SRCPKGS)))
 
-EXEC     = fraig
+EXEC     = ecoQQ
 
 all: libs main
 
